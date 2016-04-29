@@ -23,8 +23,13 @@ public:
     void print_file(); //Just to test if the whole file is there
 
 private:
+    string accentedN = "ñ";
+    string accentedI = "í";
+    string accentedO = "õ";
+
     vector<string> lines;
     map<char,int > found_characters; //first is the character,the int is it's occurrence
+    map<string,int> special_characters;
     map<char,int>::iterator iter;
 };
 #endif
