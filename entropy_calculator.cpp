@@ -52,9 +52,17 @@ void entropy_calculator::find_characters() {
         str = remove_special_n(str);
         str = remove_special_i(str);
         str = remove_special_o(str);
+        str = remove_other_o(str);
         str = remove_special_u(str);
         str = remove_special_e(str);
         str = remove_special_a(str);
+        //All special characters should have been removed by now
+        for(int j = 0; j < str.length(); j++) {
+            char current = str[j];
+            if(!isalpha(current)) continue; //Check to see if valid character
+            current = toupper(current);
+
+        }
     }
 }
 
@@ -122,6 +130,29 @@ string entropy_calculator::remove_special_o(string s) {
         }
         spec_iter->second++;
         s.erase(position,accentedO.length());
+        continue;
+    }
+    return s;
+}
+
+string entropy_calculator::remove_other_o(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(otherAccentedO);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(otherAccentedO);
+        if(spec_iter == special_characters.end()){
+            special_characters[otherAccentedO] = 1;
+            s.erase(position,otherAccentedO.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,otherAccentedO.length());
         continue;
     }
     return s;

@@ -26,6 +26,7 @@ private:
     string accentedN = "ñ";
     string accentedI = "í";
     string accentedO = "õ";
+    string otherAccentedO = "ó";
     string accentedU = "ú";
     string accentedE = "é";
     string accentedA = "á";
@@ -33,6 +34,7 @@ private:
     string remove_special_n(string s);
     string remove_special_i(string s);
     string remove_special_o(string s);
+    string remove_other_o(string s);
     string remove_special_u(string s);
     string remove_special_e(string s);
     string remove_special_a(string s);
