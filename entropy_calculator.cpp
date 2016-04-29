@@ -51,6 +51,10 @@ void entropy_calculator::find_characters() {
         str = lines[i];
         str = remove_special_n(str);
         str = remove_special_i(str);
+        str = remove_special_o(str);
+        str = remove_special_u(str);
+        str = remove_special_e(str);
+        str = remove_special_a(str);
     }
 }
 
@@ -100,8 +104,103 @@ string entropy_calculator::remove_special_i(string s) {
     return s;
 }
 
+string entropy_calculator::remove_special_o(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(accentedO);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(accentedO);
+        if(spec_iter == special_characters.end()){
+            special_characters[accentedO] = 1;
+            s.erase(position,accentedO.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,accentedO.length());
+        continue;
+    }
+    return s;
+}
+
+string entropy_calculator::remove_special_u(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(accentedU);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(accentedU);
+        if(spec_iter == special_characters.end()){
+            special_characters[accentedU] = 1;
+            s.erase(position,accentedU.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,accentedU.length());
+        continue;
+    }
+    return s;
+}
+
+string entropy_calculator::remove_special_e(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(accentedE);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(accentedE);
+        if(spec_iter == special_characters.end()){
+            special_characters[accentedE] = 1;
+            s.erase(position,accentedE.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,accentedE.length());
+        continue;
+    }
+    return s;
+}
+
+string entropy_calculator::remove_special_a(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(accentedA);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(accentedA);
+        if(spec_iter == special_characters.end()){
+            special_characters[accentedA] = 1;
+            s.erase(position,accentedA.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,accentedA.length());
+        continue;
+    }
+    return s;
+}
+
+
 void entropy_calculator::print_file() {
     for(unsigned int i = 0; i < lines.size(); i++) {
         cout << lines[i] << endl;
     }
 }
+
+

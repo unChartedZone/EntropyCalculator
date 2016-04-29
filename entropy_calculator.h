@@ -28,9 +28,15 @@ private:
     string accentedO = "õ";
     string accentedU = "ú";
     string accentedE = "é";
+    string accentedA = "á";
 
     string remove_special_n(string s);
     string remove_special_i(string s);
+    string remove_special_o(string s);
+    string remove_special_u(string s);
+    string remove_special_e(string s);
+    string remove_special_a(string s);
+
 
 
     vector<string> lines;
