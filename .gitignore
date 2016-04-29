@@ -1,2 +1,5 @@
 *.o
 entropy_calculator
+*.xml
+EntropyCalculator.iml
+
