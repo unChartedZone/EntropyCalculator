@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include "entropy_calculator.h"
 #include "entropy_error.h"
 
@@ -26,7 +27,6 @@ int main(int argc,char *argv[]) {
 
 entropy_calculator::entropy_calculator() {
     lines.clear();
-    found_characters.clear();
 }
 
 entropy_calculator::~entropy_calculator() {
@@ -47,7 +47,7 @@ void entropy_calculator::read_file(string filename) {
 void entropy_calculator::find_characters() {
     string str; //will hold current string
     for(unsigned int i = 0; i < lines.size(); i++) {
-
+        str = lines[i];
     }
 }
 

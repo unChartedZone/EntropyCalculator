@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <map>
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
 
 private:
     vector<string> lines;
-    vector<string> found_characters;
+    map<char,int > found_characters; //first is the character,the int is it's occurrence
+    map<char,int>::iterator iter;
 };
 #endif
