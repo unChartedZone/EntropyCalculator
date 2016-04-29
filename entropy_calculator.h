@@ -26,10 +26,17 @@ private:
     string accentedN = "ñ";
     string accentedI = "í";
     string accentedO = "õ";
+    string accentedU = "ú";
+    string accentedE = "é";
+
+    string remove_special_n(string s);
+    string remove_special_i(string s);
+
 
     vector<string> lines;
     map<char,int > found_characters; //first is the character,the int is it's occurrence
     map<string,int> special_characters;
     map<char,int>::iterator iter;
+    map<string,int>::iterator spec_iter;
 };
 #endif
