@@ -61,7 +61,13 @@ void entropy_calculator::find_characters() {
             char current = str[j];
             if(!isalpha(current)) continue; //Check to see if valid character
             current = toupper(current);
-
+            iter = found_characters.find(current);
+            if(iter == found_characters.end()) {
+                found_characters[current] = 1;
+                continue;
+            }
+            iter->second++;
+            continue;
         }
     }
 }
@@ -78,7 +84,7 @@ string entropy_calculator::remove_special_n(string s) {
         //Found an accented n then
         spec_iter = special_characters.find(accentedN);
         if(spec_iter == special_characters.end()){
-            special_characters[accentedN] = counter++;
+            special_characters[accentedN] = 1;
             s.erase(position,accentedN.length());
             continue;
         }
