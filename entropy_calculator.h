@@ -21,10 +21,17 @@ public:
     void read_file(string filename);
     void find_characters();
     void print_file(); //Just to test if the whole file is there
+    void calculate_t();
+    void calculate_probability();
+    void calculate_entropies();
+    void sum_of_entropies();
     void print_data();
 
 
  private:
+
+    float T; //Number of letters
+    float sum;
     string accentedN = "ñ";
     string accentedI = "í";
     string accentedO = "õ";
@@ -35,6 +42,8 @@ public:
 
 
     vector<string> lines;
+    vector<float> probabilities;
+    vector<float> entropies;
     map<char,int > found_characters; //first is the character,the int is it's occurrence
     map<string,int> special_characters;
     map<char,int>::iterator iter;

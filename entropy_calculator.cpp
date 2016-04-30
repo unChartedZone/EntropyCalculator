@@ -1,6 +1,8 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <map>
+#include <math.h>
 #include "entropy_calculator.h"
 #include "entropy_error.h"
 
@@ -14,11 +16,14 @@ int main(int argc,char *argv[]) {
     }
     string filename = argv[1];
     try{
-        entropy_calculator calcualtor;
-        calcualtor.read_file(filename);
-        calcualtor.find_characters();
-//        calcualtor.print_file();
-        calcualtor.print_data();
+        entropy_calculator calculator;
+        calculator.read_file(filename);
+        calculator.find_characters();
+        calculator.calculate_t();
+        calculator.calculate_probability();
+        calculator.calculate_entropies();
+        calculator.sum_of_entropies();
+        calculator.print_data();
     }
     catch(entropy_error except){
         cout << "**Sorry,error " << except.getMessage() << endl;
@@ -28,7 +33,10 @@ int main(int argc,char *argv[]) {
 }
 
 entropy_calculator::entropy_calculator() {
+    T = 0;
+    sum = 0;
     lines.clear();
+    probabilities.clear();
 }
 
 entropy_calculator::~entropy_calculator() {
@@ -235,19 +243,74 @@ string entropy_calculator::remove_special_a(string s) {
 }
 
 
+
+
 void entropy_calculator::print_file() {
     for(unsigned int i = 0; i < lines.size(); i++) {
         cout << lines[i] << endl;
     }
 }
 
+void entropy_calculator::calculate_t() {
+    map<char,int>::iterator temp;
+    for(temp = found_characters.begin(); temp != found_characters.end(); temp++) {
+        int current = temp->second;
+        T = T + current;
+    }
+    map<string,int>::iterator temp2;
+    for(temp2 = special_characters.begin(); temp2 != special_characters.end();temp2++) {
+        int current = temp2->second;
+        T = T + current;
+    }
+}
+
+void entropy_calculator::calculate_probability() {
+//    T = found_characters.size() + special_characters.size();
+    for(iter = found_characters.begin(); iter != found_characters.end();iter++) {
+        int currentOccurrence = iter->second;
+        currentOccurrence = (double)currentOccurrence;
+        double temp = currentOccurrence/T;
+        probabilities.push_back(temp);
+    }
+    for(spec_iter = special_characters.begin(); spec_iter != special_characters.end();spec_iter++) {
+        int currentOccurrence = spec_iter->second;
+        double temp = T/currentOccurrence;
+        probabilities.push_back(temp);
+    }
+}
+
+void entropy_calculator::calculate_entropies() {
+    for(int i = 0; i < probabilities.size();i++) {
+        float temp = log2(probabilities[i]);
+        float current = probabilities[i] * temp;
+        entropies.push_back(current);
+    }
+}
+
+void entropy_calculator::sum_of_entropies() {
+    for(int i = 0; i < entropies.size(); i++) {
+        sum = sum + entropies[i];
+    }
+}
+
 void entropy_calculator::print_data() {
+    int counter = 0;
     for(iter = found_characters.begin(); iter != found_characters.end();iter++) {
         cout << iter->first << ": " << iter->second << endl;
     }
     for(spec_iter = special_characters.begin();spec_iter != special_characters.end();++spec_iter) {
         cout << spec_iter->first << ": " << spec_iter->second << endl;
     }
+
+    cout << "Probabilites: " << endl;
+    cout << "#############" << endl;
+    for(int i = 0; i < probabilities.size();i++) {
+        cout << probabilities[i] << endl;
+    }
+    cout << "#########################" << endl;
+//    cout << "# of normal characters " << found_characters.size() << endl;
+//    cout << "# of special characters " << special_characters.size() << endl;
+    cout << "This is the sum: " << fixed << sum << endl;
 }
 
 
