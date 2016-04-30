@@ -274,7 +274,8 @@ void entropy_calculator::calculate_probability() {
     }
     for(spec_iter = special_characters.begin(); spec_iter != special_characters.end();spec_iter++) {
         int currentOccurrence = spec_iter->second;
-        double temp = T/currentOccurrence;
+        currentOccurrence = (double)currentOccurrence;
+        double temp = currentOccurrence/T;
         probabilities.push_back(temp);
     }
 }
