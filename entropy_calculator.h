@@ -21,8 +21,10 @@ public:
     void read_file(string filename);
     void find_characters();
     void print_file(); //Just to test if the whole file is there
+    void print_data();
 
-private:
+
+ private:
     string accentedN = "ñ";
     string accentedI = "í";
     string accentedO = "õ";
@@ -30,6 +32,13 @@ private:
     string accentedU = "ú";
     string accentedE = "é";
     string accentedA = "á";
+
+
+    vector<string> lines;
+    map<char,int > found_characters; //first is the character,the int is it's occurrence
+    map<string,int> special_characters;
+    map<char,int>::iterator iter;
+    map<string,int>::iterator spec_iter;
 
     string remove_special_n(string s);
     string remove_special_i(string s);
@@ -39,12 +48,5 @@ private:
     string remove_special_e(string s);
     string remove_special_a(string s);
 
-
-
-    vector<string> lines;
-    map<char,int > found_characters; //first is the character,the int is it's occurrence
-    map<string,int> special_characters;
-    map<char,int>::iterator iter;
-    map<string,int>::iterator spec_iter;
 };
 #endif

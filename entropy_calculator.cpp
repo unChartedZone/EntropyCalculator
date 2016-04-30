@@ -17,7 +17,8 @@ int main(int argc,char *argv[]) {
         entropy_calculator calcualtor;
         calcualtor.read_file(filename);
         calcualtor.find_characters();
-        calcualtor.print_file();
+//        calcualtor.print_file();
+        calcualtor.print_data();
     }
     catch(entropy_error except){
         cout << "**Sorry,error " << except.getMessage() << endl;
@@ -237,6 +238,15 @@ string entropy_calculator::remove_special_a(string s) {
 void entropy_calculator::print_file() {
     for(unsigned int i = 0; i < lines.size(); i++) {
         cout << lines[i] << endl;
+    }
+}
+
+void entropy_calculator::print_data() {
+    for(iter = found_characters.begin(); iter != found_characters.end();iter++) {
+        cout << iter->first << ": " << iter->second << endl;
+    }
+    for(spec_iter = special_characters.begin();spec_iter != special_characters.end();++spec_iter) {
+        cout << spec_iter->first << ": " << spec_iter->second << endl;
     }
 }
 
