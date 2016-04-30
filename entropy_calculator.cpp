@@ -291,25 +291,31 @@ void entropy_calculator::sum_of_entropies() {
     for(int i = 0; i < entropies.size(); i++) {
         sum = sum + entropies[i];
     }
+    sum *= -1;
 }
 
 void entropy_calculator::print_data() {
     int counter = 0;
     for(iter = found_characters.begin(); iter != found_characters.end();iter++) {
-        cout << iter->first << ": " << iter->second << endl;
+        cout << iter->first << ": " << iter->second
+            << "\tProbablity: " << probabilities[counter] << "\tEntropy: " << entropies[counter] <<endl;
+        counter++;
     }
     for(spec_iter = special_characters.begin();spec_iter != special_characters.end();++spec_iter) {
-        cout << spec_iter->first << ": " << spec_iter->second << endl;
+        cout << spec_iter->first << ": " << spec_iter->second
+            << "\tProbability: " << probabilities[counter] << "\tEntropy: " << entropies[counter] << endl;
+        counter++;
     }
 
-    cout << "Probabilites: " << endl;
-    cout << "#############" << endl;
-    for(int i = 0; i < probabilities.size();i++) {
-        cout << probabilities[i] << endl;
-    }
-    cout << "#########################" << endl;
+//    cout << "Probabilites: " << endl;
+//    cout << "#############" << endl;
+//    for(int i = 0; i < probabilities.size();i++) {
+//        cout << probabilities[i] << endl;
+//    }
+//    cout << "#########################" << endl;
 //    cout << "# of normal characters " << found_characters.size() << endl;
 //    cout << "# of special characters " << special_characters.size() << endl;
+    cout << endl;
     cout << "This is the sum: " << fixed << sum << endl;
 }
 
