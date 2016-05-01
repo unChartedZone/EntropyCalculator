@@ -37,6 +37,9 @@ entropy_calculator::entropy_calculator() {
     sum = 0;
     lines.clear();
     probabilities.clear();
+    found_characters.clear(); //Just to be sure
+    special_characters.clear(); //Just to be sure
+    german_selected = true;
 }
 
 entropy_calculator::~entropy_calculator() {
@@ -58,13 +61,18 @@ void entropy_calculator::find_characters() {
     string str; //will hold current string
     for(unsigned int i = 0; i < lines.size(); i++) {
         str = lines[i];
-        str = remove_special_n(str);
-        str = remove_special_i(str);
-        str = remove_special_o(str);
-        str = remove_other_o(str);
-        str = remove_special_u(str);
-        str = remove_special_e(str);
-        str = remove_special_a(str);
+        if (german_selected) {
+            str = remove_german_b(str);
+        }
+        else {
+            str = remove_special_n(str);
+            str = remove_special_i(str);
+            str = remove_special_o(str);
+            str = remove_other_o(str);
+            str = remove_special_u(str);
+            str = remove_special_e(str);
+            str = remove_special_a(str);
+        }
         //All special characters should have been removed by now
         for(int j = 0; j < str.length(); j++) {
             char current = str[j];
@@ -242,7 +250,9 @@ string entropy_calculator::remove_special_a(string s) {
     return s;
 }
 
-
+string entropy_calculator::remove_german_b(string temp) {
+    return temp;
+}
 
 
 void entropy_calculator::print_file() {
@@ -322,5 +332,9 @@ void entropy_calculator::print_data() {
     cout << endl;
     cout << "This is the sum: " << fixed << sum << endl;
 }
+
+
+
+
 
 

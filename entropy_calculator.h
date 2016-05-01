@@ -32,6 +32,9 @@ public:
 
     float T; //Number of letters
     float sum;
+    bool german_selected;
+
+    //Spanish special characters
     string accentedN = "ñ";
     string accentedI = "í";
     string accentedO = "õ";
@@ -40,6 +43,16 @@ public:
     string accentedE = "é";
     string accentedA = "á";
 
+    //German characters
+    string germanA = "ä";
+    string germanB = "ß";
+    string germanO = "ö";
+    string germanU = "ü";
+
+    string remove_german_a(string s);
+    string remove_german_b(string s);
+    string remove_german_o(string s);
+    string remove_german_u(string s);
 
     vector<string> lines;
     vector<float> probabilities;
