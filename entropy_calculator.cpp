@@ -262,6 +262,8 @@ void entropy_calculator::calculate_t() {
         int current = temp2->second;
         T = T + current;
     }
+
+    cout << "This is T: " << T << endl;
 }
 
 void entropy_calculator::calculate_probability() {
@@ -283,6 +285,7 @@ void entropy_calculator::calculate_probability() {
 void entropy_calculator::calculate_entropies() {
     for(int i = 0; i < probabilities.size();i++) {
         float temp = log2(probabilities[i]);
+        cout << "Log2 of entropy " << temp << endl;
         float current = probabilities[i] * temp;
         entropies.push_back(current);
     }
@@ -299,12 +302,12 @@ void entropy_calculator::print_data() {
     int counter = 0;
     for(iter = found_characters.begin(); iter != found_characters.end();iter++) {
         cout << iter->first << ": " << iter->second
-            << "\tProbablity: " << probabilities[counter] << "\tEntropy: " << entropies[counter] <<endl;
+            << "\tProbablity: " << setprecision(5) << fixed << probabilities[counter] << "\tEntropy: " << setprecision(5) << fixed << entropies[counter] <<endl;
         counter++;
     }
     for(spec_iter = special_characters.begin();spec_iter != special_characters.end();++spec_iter) {
         cout << spec_iter->first << ": " << spec_iter->second
-            << "\tProbability: " << probabilities[counter] << "\tEntropy: " << entropies[counter] << endl;
+            << "\tProbability: " << setprecision(5) << fixed << probabilities[counter] << "\tEntropy: " << setprecision(5) << fixed << entropies[counter] << endl;
         counter++;
     }
 
