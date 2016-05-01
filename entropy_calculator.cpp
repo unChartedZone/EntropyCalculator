@@ -37,6 +37,7 @@ entropy_calculator::entropy_calculator() {
     sum = 0;
     lines.clear();
     probabilities.clear();
+    entropies.clear();
     found_characters.clear(); //Just to be sure
     special_characters.clear(); //Just to be sure
     german_selected = true;
@@ -62,7 +63,10 @@ void entropy_calculator::find_characters() {
     for(unsigned int i = 0; i < lines.size(); i++) {
         str = lines[i];
         if (german_selected) {
+            str = remove_german_a(str);
             str = remove_german_b(str);
+            str = remove_german_o(str);
+            str = remove_german_u(str);
         }
         else {
             str = remove_special_n(str);
@@ -250,9 +254,99 @@ string entropy_calculator::remove_special_a(string s) {
     return s;
 }
 
-string entropy_calculator::remove_german_b(string temp) {
-    return temp;
+string entropy_calculator::remove_german_a(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(germanA);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(germanA);
+        if(spec_iter == special_characters.end()){
+            special_characters[germanA] = 1;
+            s.erase(position,germanA.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,germanA.length());
+        continue;
+    }
+    return s;
 }
+
+string entropy_calculator::remove_german_b(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(germanB);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(germanB);
+        if(spec_iter == special_characters.end()){
+            special_characters[germanB] = 1;
+            s.erase(position,germanB.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,germanB.length());
+        continue;
+    }
+    return s;
+}
+
+string entropy_calculator::remove_german_o(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(germanO);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(germanO);
+        if(spec_iter == special_characters.end()){
+            special_characters[germanO] = 1;
+            s.erase(position,germanO.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,germanO.length());
+        continue;
+    }
+    return s;
+}
+
+string entropy_calculator::remove_german_u(string s) {
+    bool can_stil_contian = true;
+    int counter = 1;
+    while(can_stil_contian) {
+        int position = s.find(germanU);
+        if(position == -1) {
+            can_stil_contian = false;
+            continue;
+        }
+        //Found an accented n then
+        spec_iter = special_characters.find(germanU);
+        if(spec_iter == special_characters.end()){
+            special_characters[germanU] = 1;
+            s.erase(position,germanU.length());
+            continue;
+        }
+        spec_iter->second++;
+        s.erase(position,germanU.length());
+        continue;
+    }
+    return s;
+}
+
+
 
 
 void entropy_calculator::print_file() {
