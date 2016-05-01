@@ -389,7 +389,7 @@ void entropy_calculator::calculate_probability() {
 void entropy_calculator::calculate_entropies() {
     for(int i = 0; i < probabilities.size();i++) {
         float temp = log2(probabilities[i]);
-        cout << "Log2 of entropy " << temp << endl;
+        cout << "Log2 of probability " << temp << endl;
         float current = probabilities[i] * temp;
         entropies.push_back(current);
     }
